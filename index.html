@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shubhankar Singh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f6f4f0;
+      --surface: #ffffff;
+      --ink: #1a1814;
+      --ink-mid: #4a4642;
+      --ink-light: #8a8480;
+      --accent: #5c3d2e;
+      --accent-soft: #d4b8a8;
+      --rule: #e2ddd8;
+      --tag-bg: #ede9e3;
+      --link: #5c3d2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .page {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(246, 244, 240, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+      padding: 14px 0;
+    }
+    nav .page {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .nav-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 72px 0 56px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 160px;
+      gap: 40px;
+      align-items: start;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(38px, 6vw, 56px);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-role {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+    }
+    .hero-tagline {
+      font-size: 15.5px;
+      color: var(--ink-mid);
+      max-width: 480px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 5px 11px;
+      transition: all 0.2s;
+    }
+    .social-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(92,61,46,0.04);
+    }
+    .social-links a svg { flex-shrink: 0; }
+
+    .photo-wrap {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--tag-bg);
+      border: 1px solid var(--rule);
+      position: relative;
+    }
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--accent-soft);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Section shared ── */
+    section {
+      padding: 52px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* ── About ── */
+    .about-body {
+      font-size: 15.5px;
+      color: var(--ink-mid);
+      line-height: 1.8;
+    }
+    .about-body p + p { margin-top: 16px; }
+    .about-body a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── Interests ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      font-size: 12.5px;
+      background: var(--tag-bg);
+      color: var(--ink-mid);
+      padding: 5px 12px;
+      border-radius: 2px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Publications ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pub-item {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    .pub-item:last-child { border-bottom: none; }
+    .pub-year {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 13px;
+      color: var(--ink-light);
+      padding-top: 3px;
+      font-weight: 400;
+    }
+    .pub-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.45;
+      margin-bottom: 5px;
+    }
+    .pub-authors {
+      font-size: 13px;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .pub-authors strong {
+      color: var(--ink-mid);
+      font-weight: 400;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .pub-venue {
+      display: inline-block;
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .pub-badge {
+      display: inline-block;
+      font-size: 10.5px;
+      background: rgba(92,61,46,0.08);
+      color: var(--accent);
+      padding: 2px 7px;
+      border-radius: 2px;
+      margin-left: 6px;
+      vertical-align: middle;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Experience ── */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .exp-item {}
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 3px;
+    }
+    .exp-role {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .exp-date {
+      font-size: 12.5px;
+      color: var(--ink-light);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+    }
+    .exp-org {
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .exp-desc {
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 36px 0 48px;
+      text-align: center;
+    }
+    .footer-email {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .footer-note {
+      font-size: 12px;
+      color: var(--ink-light);
+    }
+
+    /* ── Animations ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 540px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .photo-wrap { width: 120px; }
+      .pub-item { grid-template-columns: 40px 1fr; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="page">
+      <a class="nav-name" href="#">Shubhankar Singh</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="page">
+      <div class="hero-grid">
+        <div>
+          <p class="hero-role">AI Researcher · NLP · Multimodal AI</p>
+          <h1>Shubhankar<br /><em>Singh</em></h1>
+          <p class="hero-tagline">
+            Working at the intersection of language, vision, and cognition — building benchmarks,
+            systems, and tools that make AI more reliable in high-stakes assessment contexts.
+          </p>
+          <div class="social-links">
+            <a href="https://scholar.google.com/citations?user=9k_NhWEAAAAJ&hl=en" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Scholar
+            </a>
+            <a href="https://www.linkedin.com/in/koseii" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://x.com/itsJianYang" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              Twitter
+            </a>
+            <a href="https://github.com/shubhankarsingh" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+        <div class="photo-wrap">
+          <!-- Replace src with your photo -->
+          <div class="photo-placeholder">SS</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- About -->
+    <section id="about">
+      <div class="page fade-in">
+        <div class="section-label">About</div>
+        <div class="about-body">
+          <p>
+            I am an AI &amp; Linguistics researcher and engineer with interests at the intersection of
+            <strong>natural language processing</strong>, <strong>multimodal reasoning</strong>, and
+            <strong>educational AI</strong>. I'm particularly drawn to questions about how language models
+            represent discourse structure, and how vision-language models interact with
+            quasi-symbolic and directional representations in images.
+          </p>
+          <p>
+            Professionally, I work at <a href="https://mettl.com" target="_blank" rel="noopener">Mercer Mettl</a>
+            (Marsh &amp; McLennan Companies), an AI-based psychometric assessments platform, where I build
+            real-world assessment and proctoring systems. I have also spent the last two years collaborating
+            with <a href="https://scholar.google.com/citations?user=Vivek" target="_blank" rel="noopener">Dr. Vivek Gupta</a>
+            and the Cognitive Computation Group at UPenn (now ASU) on benchmark development for multimodal reasoning.
+          </p>
+          <p>
+            I hold a B.Tech. in Computer Science from Manipal University Jaipur (CGPA 9.35/10, Dean's List).
+            I serve as a peer reviewer for ACL ARR and IEEE Transactions on Audio, Speech &amp; Language Processing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interests -->
+    <section id="interests">
+      <div class="page fade-in">
+        <div class="section-label">Research Interests</div>
+        <div class="tags">
+          <span class="tag">Natural Language Processing</span>
+          <span class="tag">Multimodal Reasoning</span>
+          <span class="tag">Vision-Language Models</span>
+          <span class="tag">Discourse Coherence</span>
+          <span class="tag">Educational AI &amp; Psychometry</span>
+          <span class="tag">Cognitive Science</span>
+          <span class="tag">Learning Psychology</span>
+          <span class="tag">Benchmark Design</span>
+          <span class="tag">Explainability &amp; Fair AI</span>
+          <span class="tag">Linguistics</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <div class="page fade-in">
+        <div class="section-label">Publications</div>
+        <div class="pub-list">
+
+          <div class="pub-item">
+            <div class="pub-year">2025</div>
+            <div>
+              <div class="pub-venue">IJCNLP-AACL 2025</div>
+              <div class="pub-title">InterChart: Benchmarking Visual Reasoning Across Decomposed and Distributed Chart Information</div>
+              <div class="pub-authors">AIKN Iyengar, Srija Mukhopadhyay, Adnan Qidwai, <strong>Shubhankar Singh</strong>, Dan Roth, Vivek Gupta</div>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-year">2024</div>
+            <div>
+              <div class="pub-venue">ACL 2024 Findings</div>
+              <div class="pub-title">FlowVQA: Mapping Multimodal Logic in Visual Question Answering with Flowcharts</div>
+              <div class="pub-authors"><strong>Shubhankar Singh</strong>, Purvi Chaurasia, Yerram Varun, Pranshu Pandya, Vatsal Gupta, Vivek Gupta, Dan Roth</div>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-year">2024</div>
+            <div>
+              <div class="pub-venue">EACL 2024 Findings</div>
+              <div class="pub-title">Jigsaw Pieces of Meaning: Modeling Discourse Coherence with Informed Negative Sample Synthesis</div>
+              <div class="pub-badge">Sole Author</div>
+              <div class="pub-authors"><strong>Shubhankar Singh</strong></div>
+            </div>
+          </div>
+
+          <div class="pub-item">
+            <div class="pub-year">2023</div>
+            <div>
+              <div class="pub-venue">AAAI 2023 · EAAI Track</div>
+              <div class="pub-title">H-AES: Towards Automated Essay Scoring for Hindi</div>
+              <div class="pub-authors"><strong>Shubhankar Singh</strong>, Anirudh Pupneja, Shivaansh Mital, Cheril Shah, Manish Bawkar, Lakshman Prasad Gupta, Ajit Kumar, Yaman Kumar, Rushali Gupta, Rajiv Ratn Shah</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="page fade-in">
+        <div class="section-label">Experience</div>
+        <div class="exp-list">
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">AI Engineer</span>
+              <span class="exp-date">Jul 2023 – Present</span>
+            </div>
+            <div class="exp-org">Mercer Mettl · Marsh &amp; McLennan Companies</div>
+            <div class="exp-desc">
+              R&amp;D on IELTS-CEFR aligned writing assessment, real-time AI proctoring (YOLO + VLM pipeline),
+              and speech plagiarism detection. Engineered parametric band scoring achieving 0.83 Pearson
+              correlation with expert raters and 93% IELTS ±1-band accuracy.
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Research Intern</span>
+              <span class="exp-date">Nov 2024 – Aug 2025</span>
+            </div>
+            <div class="exp-org">Arizona State University · CORAL Lab (Advisor: Dr. Vivek Gupta)</div>
+            <div class="exp-desc">
+              InterChart benchmark: 5.2K+ QA pairs across 2.7K+ charts for cross-chart reasoning in VLMs.
+              Developed an LLM-as-a-judge evaluation pipeline with majority-voting aggregation.
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Research Intern</span>
+              <span class="exp-date">Sep 2023 – Nov 2024</span>
+            </div>
+            <div class="exp-org">University of Pennsylvania · STIR Group (Advisor: Dr. Vivek Gupta)</div>
+            <div class="exp-desc">
+              Led FlowVQA — a flowchart-centered VQA benchmark with 2K+ charts and 22K QA pairs.
+              Evaluated leading open and closed-source VLMs; revealed pre-training biases in visual grounding.
+            </div>
+          </div>
+
+          <div class="exp-item">
+            <div class="exp-header">
+              <span class="exp-role">Research Intern</span>
+              <span class="exp-date">May 2022 – Jun 2023</span>
+            </div>
+            <div class="exp-org">IIIT Delhi · MIDAS Lab (Advisor: Dr. Rajiv Ratn Shah)</div>
+            <div class="exp-desc">
+              Established automated essay scoring for low-resource Hindi. Achieved English-comparable accuracy
+              (max QWK: 0.74, XLM-RoBERTa) across classical and transformer-based baselines.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="page fade-in">
+        <div class="section-label">Contact</div>
+        <div class="footer-email">shubhankarsingh2001 [at] gmail [dot] com</div>
+        <p class="footer-note">Based in Gurugram, India · Open to research collaborations</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page">
+      <p style="font-size:12px; color: var(--ink-light);">
+        Shubhankar Singh &nbsp;·&nbsp; <span id="year"></span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Stagger hero on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const hero = document.querySelector('.hero');
+      if (hero) {
+        hero.style.opacity = '0';
+        hero.style.transform = 'translateY(16px)';
+        hero.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            hero.style.opacity = '1';
+            hero.style.transform = 'none';
+          }, 80);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
